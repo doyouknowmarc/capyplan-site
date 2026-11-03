@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CapyPlan — A gentle daily planner</title>
+<meta name="description" content="A gentle daily planner with a capybara who cheers you on. Nothing goes overdue, nothing resets.">
+<link rel="icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <a class="nav__brand" href="#top" aria-label="CapyPlan home">
+    <img src="assets/app-icon.png" alt="" width="36" height="36">
+    <span>CapyPlan</span>
+  </a>
+  <a class="store store--sm" href="https://apps.apple.com/us/app/capyplan-gentle-daily-planner/id6758460339">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.1-1.2 2.9-2.4.9-1.4 1.3-2.7 1.3-2.8-.1 0-2.4-.9-2.4-3.9zM14 5.4c.7-.8 1.1-1.9 1-3-.9 0-2.1.6-2.8 1.4-.6.7-1.2 1.9-1 2.9 1.1.1 2.1-.5 2.8-1.3z"/></svg>
+    <span><small>Download on the</small>App Store</span>
+  </a>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <h1 class="mark" aria-label="CapyPlan">
+      <span class="w"><span class="mark__l">C<button class="perch perch--c" data-capy="front" aria-label="Pet Capy">
+          <img src="assets/capy-front.webp" alt="" width="264" height="318">
+          <svg class="yuzu yuzu--hat" viewBox="0 0 40 40" aria-hidden="true"><use href="#yuzu"/></svg>
+        </button></span><span>a</span><span class="mark__l">p<button class="perch perch--p" data-capy="three" aria-label="Pet Capy">
+          <img src="assets/capy-three.webp" alt="" width="329" height="334">
+        </button></span><span>y</span></span><span class="w"><span>P</span><span class="mark__l">l<button class="perch perch--l" data-capy="back" aria-label="Pet Capy">
+          <img src="assets/capy-back.webp" alt="" width="267" height="315">
+        </button></span><span>a</span><span class="mark__l">n<button class="perch perch--n" data-capy="hero" aria-label="Pet Capy">
+          <img src="assets/capy-hero.webp" alt="" width="644" height="630">
+        </button></span></span>
+      <span class="bubble" id="bubble" role="status" aria-live="polite"></span>
+    </h1>
+
+    <p class="hero__tag">Your gentle daily planner, with a capybara who cheers you on.</p>
+
+    <div class="hero__cta">
+      <a class="store" href="https://apps.apple.com/us/app/capyplan-gentle-daily-planner/id6758460339">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.1-1.2 2.9-2.4.9-1.4 1.3-2.7 1.3-2.8-.1 0-2.4-.9-2.4-3.9zM14 5.4c.7-.8 1.1-1.9 1-3-.9 0-2.1.6-2.8 1.4-.6.7-1.2 1.9-1 2.9 1.1.1 2.1-.5 2.8-1.3z"/></svg>
+        <span><small>Download on the</small>App Store</span>
+      </a>
+      <a class="btn-ghost" href="shop.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#F07C6B" d="M12 21s-7.5-4.6-9.6-9.2C.9 8.5 3 4.5 6.8 4.5c2.1 0 3.6 1.1 4.4 2.5h1.6c.8-1.4 2.3-2.5 4.4-2.5 3.8 0 5.9 4 4.4 7.3C19.5 16.4 12 21 12 21z"/></svg>
+        Buy the plush
+      </a>
+    </div>
+    <p class="hero__hint" aria-hidden="true">psst — say hi to a capy</p>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats">
+    <div>
+      <h2>4.8-star App Store rating</h2>
+      <p>From people who quit five planners before this one.</p>
+    </div>
+    <div>
+      <h2>Nothing goes overdue</h2>
+      <p>Unfinished tasks float back to your basket. No red. No resets.</p>
+    </div>
+    <div>
+      <h2>No sign-in, ever</h2>
+      <p>Your day stays on your phone, and so does Capy.</p>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how" id="how">
+    <div class="section-head">
+      <p class="eyebrow">How it works</p>
+      <h2>Plan the day you're<br>actually having.</h2>
+      <p>Most planners punish you when life happens. CapyPlan assumes it will — and Capy is glad to see you no matter how the day went.</p>
+    </div>
+
+    <div class="screens" tabindex="0" aria-label="App screenshots">
+      <figure><img src="assets/screen-0.webp" alt="CapyPlan daily list with Capy in a hot spring" loading="lazy" width="690" height="1496"></figure>
+      <figure><img src="assets/screen-1.webp" alt="Capy cheering as tasks are completed" loading="lazy" width="690" height="1496"></figure>
+      <figure><img src="assets/screen-2.webp" alt="CapyPlan screen" loading="lazy" width="690" height="1496"></figure>
+      <figure><img src="assets/screen-3.webp" alt="CapyPlan screen" loading="lazy" width="690" height="1496"></figure>
+      <figure><img src="assets/screen-4.webp" alt="CapyPlan screen" loading="lazy" width="690" height="1496"></figure>
+    </div>
+
+    <div class="cards">
+      <article class="card card--mint">
+        <span class="card__k">01</span>
+        <h3>Daily check-in</h3>
+        <p>Tell Capy your mood and energy, then plan for the day you've got — not the one you wished for.</p>
+      </article>
+      <article class="card card--apricot">
+        <span class="card__k">02</span>
+        <h3>Ramble to Capy</h3>
+        <p>Talk out the pile in your head and it becomes a plan. No structure required.</p>
+      </article>
+      <article class="card card--mint">
+        <span class="card__k">03</span>
+        <h3>Too hard today?</h3>
+        <p>Rest it, make it gentle, or break it into steps small enough to start.</p>
+      </article>
+      <article class="card card--apricot">
+        <span class="card__k">04</span>
+        <h3>Evening reflection</h3>
+        <p>See what you <em>did</em> do, and end the day encouraged instead of behind.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- YUZU BATH -->
+  <section class="bath" id="bath">
+    <div class="bath__copy">
+      <p class="eyebrow">The yuzu bath</p>
+      <h2>Every finished task<br>is a yuzu for Capy.</h2>
+      <p>Drop one in and watch Capy sink a little deeper into the steam. Rested a task instead? The intention still counts.</p>
+      <button class="btn-yuzu" id="dropYuzu">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><use href="#yuzu"/></svg>
+        Finish a task
+      </button>
+      <p class="bath__count" id="bathCount" aria-live="polite">0 yuzu in the bath</p>
+    </div>
+    <div class="tub" id="tub" aria-hidden="true">
+      <div class="tub__steam"><i></i><i></i><i></i></div>
+      <img class="tub__capy" id="tubCapy" src="assets/capy-front.webp" alt="">
+      <div class="tub__water"></div>
+      <div class="tub__rim"></div>
+    </div>
+  </section>
+
+  <!-- MERCH / LOOKBOOK -->
+  <section class="merch">
+    <div class="merch__photo">
+      <img src="assets/photo-campaign.webp" alt="Person in a capybara onesie hugging a capybara plush" loading="lazy" width="1122" height="1402">
+    </div>
+    <div class="merch__copy">
+      <p class="eyebrow">Coming soon · Plush + onesie</p>
+      <h2>Now you can<br>hold your Capy.</h2>
+      <p>The same tiny ears and oval cocoa muzzle you know from the app — now something you can hug. A capy to cuddle, and a matching onesie to curl up in.</p>
+      <div class="shelf" aria-hidden="true">
+        <img src="assets/capy-left.webp" alt="" style="--s:.82">
+        <img src="assets/capy-front.webp" alt="" style="--s:1">
+        <img src="assets/capy-right.webp" alt="" style="--s:.9">
+        <div class="shelf__board"></div>
+      </div>
+      <a class="btn-cocoa" href="mailto:doyouknowmarc@gmail.com?subject=Capy%20plush%20waitlist">Join the waitlist</a>
+    </div>
+  </section>
+
+  <section class="gallery">
+    <figure class="gallery__wide"><img src="assets/photo-unboxing.webp" width="1536" height="1024" alt="Capybara plush gift box and onesie sleeve" loading="lazy"></figure>
+  </section>
+
+  <!-- QUOTES -->
+  <section class="quotes">
+    <blockquote><p>“This app is SO sweet. It's been helping me keep on track with my focus.”</p><cite>Gabriel R., South Africa</cite></blockquote>
+    <blockquote class="big"><p>“I'm a simple man. I see a capy and I'm happy.”</p><cite>Halofik, Australia</cite></blockquote>
+    <blockquote><p>“Light, playful, clean and easy to understand.”</p><cite>Maria, Greece</cite></blockquote>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final">
+    <img class="final__capy" src="assets/capy-hero.webp" alt="" loading="lazy">
+    <h2>Gentle is power.<br>Come plan with Capy.</h2>
+    <a class="store store--lg" href="https://apps.apple.com/us/app/capyplan-gentle-daily-planner/id6758460339">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.1-1.2 2.9-2.4.9-1.4 1.3-2.7 1.3-2.8-.1 0-2.4-.9-2.4-3.9zM14 5.4c.7-.8 1.1-1.9 1-3-.9 0-2.1.6-2.8 1.4-.6.7-1.2 1.9-1 2.9 1.1.1 2.1-.5 2.8-1.3z"/></svg>
+      <span><small>Download on the</small>App Store</span>
+    </a>
+    <p class="final__fine">Free · iPhone, iPad &amp; Apple Watch · Syncs with Apple Reminders</p>
+  </section>
+</main>
+
+<footer class="foot">
+  <span>© 2026 Family Dog Pty Ltd</span>
+  <a href="shop.html">Shop the Capy plush →</a>
+</footer>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <radialGradient id="yz" cx="38%" cy="34%" r="70%">
+      <stop offset="0" stop-color="#FFE27A"/><stop offset=".55" stop-color="#F8C53A"/><stop offset="1" stop-color="#E9A21F"/>
+    </radialGradient>
+    <symbol id="yuzu" viewBox="0 0 40 40">
+      <circle cx="20" cy="22" r="15" fill="url(#yz)"/>
+      <circle cx="14" cy="17" r="3.2" fill="#fff" opacity=".45"/>
+      <g fill="#C98712" opacity=".35"><circle cx="24" cy="27" r=".9"/><circle cx="28" cy="21" r=".8"/><circle cx="18" cy="30" r=".8"/><circle cx="27" cy="31" r=".7"/></g>
+      <path d="M20 8c0-2 1-3.5 2.5-4" stroke="#7A5A2A" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+      <path d="M21.5 7.5c3-3.5 8-3.5 10-1.5-2.5 3-7 3.5-10 1.5z" fill="#7DB36A"/>
+    </symbol>
+  </defs>
+</svg>
+
+<script src="main.js"></script>
+</body>
+</html>

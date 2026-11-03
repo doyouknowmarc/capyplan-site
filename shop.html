@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Capy Plush — CapyPlan</title>
+<meta name="description" content="Meet Capy, the plush. Round, smiley, and ready for your favorite spot.">
+<link rel="icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --apricot: #F3A548;
+    --cocoa: #704222;
+    --cocoa-ink: #4A2A14;
+    --mint: #BFE2D3;
+    --cream: #FFF5DF;
+    --paper: #FBF3E4;
+    --line: rgba(112, 66, 34, .14);
+    --display: "Fredoka", ui-rounded, system-ui, sans-serif;
+    --body: "Nunito", ui-rounded, system-ui, sans-serif;
+    --ease-pop: cubic-bezier(.34, 1.56, .64, 1);
+    --s: .94; /* plush display scale */
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100svh;
+    background: var(--paper); color: var(--cocoa-ink);
+    font-family: var(--body); font-size: 17px; line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    display: flex; flex-direction: column;
+  }
+  img { display: block; max-width: 100%; height: auto; }
+  h1 { font-family: var(--display); color: var(--cocoa); margin: 0; line-height: 1.02; letter-spacing: -.02em; }
+
+  .top {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px clamp(16px, 4vw, 40px);
+  }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font: 700 22px var(--display); color: var(--cocoa); }
+  .brand img { width: 32px; height: 32px; border-radius: 9px; }
+  .top__tag { font-size: 13px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: rgba(112, 66, 34, .55); }
+
+  main { flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 8px 16px 64px; }
+
+  /* ---------- stage ---------- */
+  .stage {
+    position: relative; width: min(560px, 100%);
+    height: min(470px, 84vw);
+    display: flex; align-items: flex-end; justify-content: center;
+  }
+  .stage::after { /* ground shadow */
+    content: ""; position: absolute; bottom: -10px; left: 50%;
+    width: calc(var(--s) * 400px); max-width: 76%; height: 26px; transform: translateX(-50%);
+    background: radial-gradient(closest-side, rgba(112, 66, 34, .22), transparent);
+    transition: width .5s var(--ease-pop);
+  }
+  .plush {
+    position: relative; z-index: 1;
+    width: calc(var(--s) * min(460px, 78vw));
+    transition: width .5s var(--ease-pop);
+    cursor: none; touch-action: none;
+  }
+  .plush img {
+    width: 100%; user-select: none; -webkit-user-drag: none;
+    transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(var(--lift, 0px));
+    transition: transform .5s var(--ease-pop);
+  }
+  .stage.show-dims .plush img { --lift: -6px; transition: transform .12s ease-out; }
+
+  /* little hearts that float up over Capy's head on hover */
+  .hearts { position: absolute; left: 40%; top: 6%; width: 0; height: 0; pointer-events: none; z-index: 3; }
+  .heart {
+    position: absolute; left: 0; top: 0; width: 34px; height: 34px; margin: -17px 0 0 -17px;
+    color: #F07C6B; filter: drop-shadow(0 4px 6px rgba(240, 124, 107, .35));
+    animation: heart-up 1.6s cubic-bezier(.2, .7, .3, 1) forwards;
+  }
+  .heart--sm { width: 22px; height: 22px; margin: -11px 0 0 -11px; color: #F5A08F; }
+  @keyframes heart-up {
+    0% { opacity: 0; transform: translate(0, 10px) scale(.3) rotate(var(--r)); }
+    18% { opacity: 1; transform: translate(calc(var(--dx) * .3), -14px) scale(1.12) rotate(var(--r)); }
+    30% { transform: translate(calc(var(--dx) * .4), -22px) scale(1) rotate(var(--r)); }
+    100% { opacity: 0; transform: translate(var(--dx), -90px) scale(.9) rotate(calc(var(--r) * -1)); }
+  }
+
+  /* dimension guides */
+  .dim { position: absolute; color: var(--cocoa); opacity: 0; transition: opacity .25s; pointer-events: none; }
+  .dim i { position: absolute; background: currentColor; }
+  .dim b {
+    position: absolute; white-space: nowrap;
+    font: 600 14px var(--display); letter-spacing: .01em;
+    background: var(--cocoa); color: var(--cream); padding: 3px 10px; border-radius: 999px;
+  }
+  .dim--h { top: 2%; bottom: 0; right: -30px; width: 0; border-left: 1.5px dashed currentColor; }
+  .dim--h i { left: -7px; width: 12px; height: 1.5px; }
+  .dim--h i:first-child { top: 0; } .dim--h i:last-of-type { bottom: 0; }
+  .dim--h b { top: -34px; left: 0; transform: translateX(-50%); }
+  .dim--l { left: 2%; right: 2%; bottom: -34px; height: 0; border-top: 1.5px dashed currentColor; }
+  .dim--l i { top: -7px; width: 1.5px; height: 12px; }
+  .dim--l i:first-child { left: 0; } .dim--l i:last-of-type { right: 0; }
+  .dim--l b { left: 50%; top: 8px; transform: translateX(-50%); }
+  .dim--d { left: -6px; top: 14%; }
+  .dim--d b { position: static; display: inline-block; background: #fff; color: var(--cocoa); box-shadow: 0 0 0 1px var(--line); }
+  .dim--h { transform-origin: top; transform: scaleY(.4); transition: opacity .25s, transform .45s var(--ease-pop); }
+  .dim--l { transform-origin: left; transform: scaleX(.4); transition: opacity .25s, transform .45s var(--ease-pop); }
+  .dim--h b, .dim--l b { transition: none; }
+  .stage.show-dims .dim { opacity: 1; transform: none; }
+  .look:has(.show-dims) .hint { opacity: 0; }
+
+  /* loupe */
+  .loupe {
+    position: absolute; z-index: 5; width: 190px; height: 190px; border-radius: 50%;
+    pointer-events: none; opacity: 0; transform: scale(.6);
+    transition: opacity .15s, transform .25s var(--ease-pop);
+    background-color: var(--paper); background-repeat: no-repeat;
+    border: 4px solid #fff;
+    box-shadow: 0 0 0 1px var(--line), 0 18px 40px -14px rgba(74, 42, 20, .55), inset 0 0 0 1px rgba(0,0,0,.04);
+  }
+  .loupe.is-on { opacity: 1; transform: scale(1); }
+
+  .hint { transition: opacity .2s; margin: 70px 0 0; font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: rgba(112, 66, 34, .45); }
+
+  /* ---------- buy ---------- */
+  h1 { font-size: clamp(44px, 6.4vw, 76px); margin-top: 22px; }
+  .lede { margin: 14px auto 0; max-width: 44ch; font-size: 18px; }
+
+  .price { display: flex; align-items: baseline; gap: 12px; justify-content: center; margin: 22px 0 0; }
+  .price strong { font: 600 34px var(--display); color: var(--cocoa); }
+  .price span { font-size: 15px; font-weight: 700; color: rgba(74, 42, 20, .6); }
+
+  .buy { display: flex; gap: 12px; justify-content: center; align-items: center; flex-wrap: wrap; margin-top: 26px; }
+  .qty {
+    display: flex; align-items: center; height: 58px; border-radius: 18px; background: #fff;
+    box-shadow: 0 0 0 1.5px var(--line);
+  }
+  .qty button {
+    width: 46px; height: 100%; border: 0; background: none; cursor: pointer;
+    font: 600 24px var(--display); color: var(--cocoa);
+  }
+  .qty button:disabled { opacity: .3; cursor: default; }
+  .qty output { min-width: 26px; text-align: center; font: 600 20px var(--display); color: var(--cocoa); }
+  .order {
+    display: inline-flex; align-items: center; gap: 12px; height: 58px; padding: 0 30px; border-radius: 18px;
+    background: var(--cocoa); color: var(--cream); text-decoration: none;
+    font: 600 21px var(--display);
+    box-shadow: 0 1px 0 rgba(255,255,255,.2) inset, 0 10px 24px -10px rgba(112,66,34,.6);
+    transition: transform .2s var(--ease-pop), box-shadow .2s;
+  }
+  .order:hover { transform: translateY(-2px); box-shadow: 0 1px 0 rgba(255,255,255,.2) inset, 0 14px 28px -10px rgba(112,66,34,.65); }
+  .order .sep { width: 1px; height: 22px; background: rgba(255, 245, 223, .35); }
+  .fine { margin: 18px auto 0; max-width: 46ch; font-size: 14px; font-weight: 600; color: rgba(74, 42, 20, .6); }
+
+  footer { padding: 22px clamp(16px, 4vw, 40px); border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 14px; color: rgba(74, 42, 20, .6); }
+  footer a { color: inherit; }
+
+  @media (min-width: 960px) {
+    main {
+      display: grid; grid-template-columns: 1.1fr 1fr; align-items: center; gap: clamp(32px, 5vw, 80px);
+      max-width: 1240px; width: 100%; margin: 0 auto; text-align: left; padding: 0 40px 48px;
+    }
+    .look { display: flex; flex-direction: column; align-items: center; }
+    h1 { margin-top: 0; }
+    .lede, .fine { margin-left: 0; }
+    .buy, .price { justify-content: flex-start; }
+  }
+  @media (hover: none) {
+    .plush { cursor: default; }
+    .stage .dim { opacity: 1; transform: none; }
+  }
+  @media (max-width: 520px) {
+    .dim--h { right: -14px; }
+    .dim--h b { transform: translateX(-70%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: .01ms !important; }
+    .heart { animation-duration: .01ms; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <a class="brand" href="index.html"><img src="assets/app-icon.png" alt="">CapyPlan</a>
+  <span class="top__tag">The plush</span>
+</header>
+
+<main>
+  <section class="look">
+  <div class="stage" id="stage">
+    <div class="plush" id="plush">
+      <img id="plushImg" src="assets/capy-hero.webp" alt="Capy plush: a round apricot capybara with a cocoa muzzle, tiny ears and a stitched smile" width="644" height="630">
+      <div class="dim dim--h" aria-hidden="true"><i></i><i></i><b id="dimH">35 cm tall</b></div>
+      <div class="dim dim--l" aria-hidden="true"><i></i><i></i><b id="dimL">36 cm long</b></div>
+      <div class="dim dim--d" aria-hidden="true"><b id="dimD">28 cm wide</b></div>
+      <div class="hearts" id="hearts" aria-hidden="true"></div>
+    </div>
+    <div class="loupe" id="loupe" aria-hidden="true"></div>
+  </div>
+  <p class="hint" id="hint">Hover to see how big · zoom in on the fluff</p>
+  </section>
+
+  <section class="info">
+
+  <h1>Someone's been<br>waiting for you.</h1>
+  <p class="lede">This is Capy. Round like a dumpling, soft like the first minute of a nap, and very patient. Capy has been sitting on the shelf with that little smile, keeping a spot warm, hoping it would be you. Pick Capy up once and you'll see.</p>
+  <p class="price"><strong>$34</strong><span>35 cm of slow-day company</span></p>
+
+  <div class="buy">
+    <div class="qty" aria-label="Quantity">
+      <button id="minus" aria-label="One less" disabled>−</button>
+      <output id="qty" aria-live="polite">1</output>
+      <button id="plus" aria-label="One more">+</button>
+    </div>
+    <a class="order" id="order" href="#">Bring Capy home <span class="sep"></span> <span id="total">$34</span></a>
+  </div>
+  <p class="fine">No payment now. This opens an email, and we'll write back to sort out shipping and payment.</p>
+  </section>
+</main>
+
+<footer>
+  <span>© 2026 Family Dog Pty Ltd</span>
+  <a href="index.html">Also: the CapyPlan app →</a>
+</footer>
+
+<script>
+  const PLUSH = { name: "Capy plush", h: 35, l: 36, d: 28, price: 34 };
+  const ORDER_EMAIL = "doyouknowmarc@gmail.com";
+
+  const $ = (id) => document.getElementById(id);
+  const stage = $("stage"), plush = $("plush"), img = $("plushImg"), loupe = $("loupe"), hearts = $("hearts");
+  let qty = 1;
+
+  function render() {
+    $("dimH").textContent = `${PLUSH.h} cm tall`;
+    $("dimL").textContent = `${PLUSH.l} cm long`;
+    $("dimD").textContent = `${PLUSH.d} cm wide`;
+    $("qty").textContent = qty;
+    $("minus").disabled = qty <= 1;
+    $("plus").disabled = qty >= 9;
+    const total = PLUSH.price * qty;
+    $("total").textContent = `$${total}`;
+    const body = [
+      "Hi! I'd like to bring Capy home:",
+      "",
+      `${qty} × ${PLUSH.name} (${PLUSH.h} cm), $${PLUSH.price} each`,
+      `Item subtotal: $${total} USD`,
+      "",
+      "Ship to (name, address, country):",
+      "",
+      "Take it slow,",
+    ].join("\n");
+    $("order").href = `mailto:${ORDER_EMAIL}?subject=${encodeURIComponent(`Capy plush pre-order: ${qty} × ${PLUSH.name}`)}&body=${encodeURIComponent(body)}`;
+  }
+
+  $("minus").addEventListener("click", () => { qty = Math.max(1, qty - 1); render(); });
+  $("plus").addEventListener("click", () => { qty = Math.min(9, qty + 1); render(); });
+
+  // Hearts: one pops up when you arrive, then a smaller one now and then while you stay
+  const HEART = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.5 3 4.5 6.8 4.5c2.1 0 3.6 1.1 4.4 2.5h1.6c.8-1.4 2.3-2.5 4.4-2.5 3.8 0 5.9 4 4.4 7.3C19.5 16.4 12 21 12 21z"/></svg>';
+  function heart(small) {
+    const h = document.createElement("span");
+    h.className = small ? "heart heart--sm" : "heart";
+    h.innerHTML = HEART;
+    h.style.setProperty("--dx", `${(Math.random() - 0.5) * 60}px`);
+    h.style.setProperty("--r", `${(Math.random() - 0.5) * 24}deg`);
+    hearts.appendChild(h);
+    h.addEventListener("animationend", () => h.remove());
+  }
+  let heartTimer;
+
+  // Hover: dimension guides + circular magnifier that follows the pointer
+  const ZOOM = 2.1, R = 95;
+  loupe.style.backgroundImage = `url("${img.currentSrc || img.src}")`;
+  const touch = matchMedia("(hover: none)").matches;
+  if (touch) $("hint").textContent = "Touch and drag on Capy to zoom in";
+
+  function moveLoupe(e) {
+    const r = img.getBoundingClientRect(), sr = stage.getBoundingClientRect();
+    const x = e.clientX - r.left, y = e.clientY - r.top;
+    const inside = x >= 0 && y >= 0 && x <= r.width && y <= r.height;
+    loupe.classList.toggle("is-on", inside);
+    if (!inside) return;
+    // on touch, lift the lens above the finger so it isn't hidden
+    const lift = e.pointerType === "touch" ? R + 40 : 0;
+    loupe.style.left = `${e.clientX - sr.left - R - 4}px`;
+    loupe.style.top = `${e.clientY - sr.top - R - 4 - lift}px`;
+    loupe.style.backgroundSize = `${r.width * ZOOM}px ${r.height * ZOOM}px`;
+    loupe.style.backgroundPosition = `${R - x * ZOOM}px ${R - y * ZOOM}px`;
+  }
+  // a gentle tilt toward the pointer
+  function tilt(e) {
+    const r = plush.getBoundingClientRect();
+    const nx = (e.clientX - r.left) / r.width - 0.5, ny = (e.clientY - r.top) / r.height - 0.5;
+    plush.style.setProperty("--ry", `${nx * 10}deg`);
+    plush.style.setProperty("--rx", `${-ny * 7}deg`);
+  }
+  plush.addEventListener("pointerenter", (e) => {
+    stage.classList.add("show-dims");
+    if (e.pointerType === "touch") return;
+    heart(false);
+    clearInterval(heartTimer);
+    heartTimer = setInterval(() => heart(true), 1300);
+  });
+  plush.addEventListener("pointerleave", () => {
+    stage.classList.remove("show-dims");
+    loupe.classList.remove("is-on");
+    clearInterval(heartTimer);
+    plush.style.setProperty("--rx", "0deg");
+    plush.style.setProperty("--ry", "0deg");
+  });
+  plush.addEventListener("pointermove", (e) => {
+    if (e.pointerType !== "touch" || e.buttons) moveLoupe(e);
+    if (e.pointerType !== "touch") tilt(e);
+  });
+  plush.addEventListener("pointerdown", (e) => { if (e.pointerType === "touch") { plush.setPointerCapture(e.pointerId); moveLoupe(e); heart(false); } });
+  plush.addEventListener("pointerup", (e) => { if (e.pointerType === "touch") loupe.classList.remove("is-on"); });
+
+  render();
+</script>
+</body>
+</html>
